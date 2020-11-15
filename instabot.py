@@ -1,37 +1,35 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Sep  4 19:57:00 2020
-
-@author: Przemek
-"""
-
 from selenium import webdriver
 import time 
 import random
 
-
 class InstaPy():
     
     def __init__(self):
-        self.browser = webdriver.Chrome()  
+        self.browser = webdriver.Firefox()  
         print('Author = [Przemysław Szmaj]')
-        time.sleep(1)
+        time.sleep(0.5)
         print('GitHub = https://github.com/PSZMAJ')
-        time.sleep(1)
+        time.sleep(0.5)
         print('YouTube = https://www.youtube.com/channel/UCewT7Lr5f6LWvqSPXm0JKRw')
-        time.sleep(1)
-        print('InstaBot.py ver. 1.0')
+        time.sleep(0.5)
+        print('NEW VERSION ---> InstaBot.py ver. 2.0')
         time.sleep(0.5)
  
         
     ### ---> login
     ###Function is responsible for open browser and login with username and password.
     def login(self):
-        
-        self.login = ""
-        self.password = ""
+        self.login = "" ##<--- add your login
+        self.password = "" ##<--- add your password
         self.browser.get('https://www.instagram.com/')
         time.sleep(2)
+    ##---> click to accept cookies.    
+        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
+        time.sleep(1)
+        self.acceptbutton.click()
+        time.sleep(1)
+    ##---> end     
         self.emailForm = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[1]/div/label/input')
         self.emailForm.click()
         self.emailForm.send_keys(self.login)
@@ -50,7 +48,7 @@ class InstaPy():
     ### Function is responsible for open and run browser with random hashtag form hashtags[]
     def add_hashtags_and_search(self):   
         
-        self.hashtags = ['moon', 'poland', 'people', 'example']
+        self.hashtags = ['mood', 'pic', 'example','look','polishgirl','sexy','network','python']
         self.liczba = len(self.hashtags)
         self.hashtags_rand = random.randint(0, self.liczba -1)
         time.sleep(4)
@@ -61,7 +59,7 @@ class InstaPy():
         self.browser.refresh()
         time.sleep(5)
         self.browser.execute_script("window.scrollTo(10," + self.rand + ")")
-        print(' current #', self.hashtags[self.hashtags_rand])
+        print('current #', self.hashtags[self.hashtags_rand])
         time.sleep(3)
     
     ### ---> open_photo
@@ -85,7 +83,7 @@ class InstaPy():
         self.logic_skip_photo = random.randint(1,7)
         self.i = 0
         while self.i < self.logic_skip_photo:
-            time.sleep(2)
+            time.sleep(3)
             self.skip_photo_button = self.browser.find_element_by_link_text('Dalej')
             time.sleep(2)
             self.skip_photo_button.click()
@@ -100,7 +98,7 @@ class InstaPy():
         time.sleep(2)
         self.like_button = self.browser.find_element_by_class_name('fr66n')
         time.sleep(2)
-        self.get_name = self.browser.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/span/a')
+        self.get_name = self.browser.find_element_by_class_name('e1e1d')
         time.sleep(0.5)
         self.get_name.text
         print('liked photo: {}'.format(self.get_name.text))
@@ -110,7 +108,7 @@ class InstaPy():
     ### ---> next_photo
     ### Function is responsible for click to next photo.  
     def next_photo(self):
-        
+        time.sleep(2)
         self.next_photo_button = self.browser.find_element_by_link_text('Dalej')
         time.sleep(2)
         self.next_photo_button.click()
@@ -120,47 +118,59 @@ class InstaPy():
     ### Function is responsible for pause.   
     def relax(self):
         
-        self.relax_time = random.randint(200,500)
+        self.relax_time = random.randint(305,999)
         print('InstaBotPy has stopped at this moment. The system will boot up in ', self.relax_time, ' seconds')
         time.sleep(self.relax_time)
-
+        
+    ### ---> change hash
+    ### Function is responsible change hash.     
+    def change_hash(self):
+        
+        self.hashtags_rand = random.randint(0, self.liczba -1)
+        time.sleep(2)
+        self.browser.get('https://www.instagram.com/explore/tags/' + self.hashtags[self.hashtags_rand] + '/' )
+        print('# changed to # ' + self.hashtags[self.hashtags_rand])
+        time.sleep(5)
+        
+    ### ---> random like
+    ### Function is responsible random quantity like.     
+    def random_like(self):
+        
+        self.amount = random.randint(49,79) # ammount like for # sesion.
+        print('quantity like at this session - ', self.amount)
+        
+        
     ### ---> auto_like
     ### Function is responsible for auto like photo. 
     def auto_like(self):
         
-        self.amount = random.randint(15,64) # ammount like for # sesion.
+        self.random_like()
         p_liked = 0
-        
         while True:
             
           if p_liked == self.amount: # liczba przejsc petli:
-              self.hashtags_rand = random.randint(0, self.liczba -1)
-              time.sleep(2)
-              self.browser.get('https://www.instagram.com/explore/tags/' + self.hashtags[self.hashtags_rand] + '/' )
-              print('# changed to # ' + self.hashtags[self.hashtags_rand])
-              time.sleep(5)
+              self.change_hash() 
               p_liked = 0
               self.relax()
               self.browser.refresh()
               time.sleep(7)
-              self.open_photo()
+              try:
+                  self.open_photo()
+              except Exception:     
+                  self.open_photo()
+              time.sleep(4)
               self.skip_photo()
           else:
-     
             time.sleep(5)
             try:
                 self.like_photo_or_get_info()
             except Exception:     
-                 self.next_photo()
-            
-            self.relax_after_like = random.randint(2,9)
+                self.next_photo()       
+            self.relax_after_like = random.randint(2,14)
             time.sleep(self.relax_after_like)
             self.next_photo()
             p_liked = p_liked + 1
-              
-              
 
-          
 bot = InstaPy()
 bot.login()
 bot.add_hashtags_and_search()     
