@@ -31,9 +31,9 @@ class InstaPy():
         time.sleep(2)
         ##---> click to accept cookies.    
         self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[2]/div/div/button[1]')
-        time.sleep(1)
+        time.sleep(3)
         self.acceptbutton.click()
-        time.sleep(1)
+        time.sleep(3)
         ##---> end    
         self.emailForm = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[1]/div/label/input')
         self.emailForm.click()
