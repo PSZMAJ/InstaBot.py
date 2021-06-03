@@ -14,7 +14,7 @@ class InstaPy():
         print('YouTube = https://www.youtube.com/channel/UCewT7Lr5f6LWvqSPXm0JKRw')
         time.sleep(0.5)
         print('InstaBot.py ver. 2.0')
-        print('Narzedzie jest darmowe, dlatego za chwile pojawi sie profil insta autora, a za 20 sekund rozpocznie sie praca narzędzia. ')
+        print('Narzedzie jest darmowe, dlatego za chwile pojawi sie reklama autora, a za ok 30 sekund rozpocznie sie praca narzędzia. ')
         time.sleep(1)
  
         
@@ -23,16 +23,18 @@ class InstaPy():
     def login(self):
         self.login = "" ### <--- Tu wprowadź login
         self.password = "" ### <--- Tu wprowadź hasło
+        self.browser.get('www.ehaker.pl')
+        time.sleep(10)
         self.browser.get('https://www.instagram.com/_h4ker/')
         time.sleep(8)
         self.browser.get('https://www.instagram.com/')
         time.sleep(2)
-    ##---> click to accept cookies.    
-        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
+        ##---> click to accept cookies.    
+        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[2]/div/div/button[1]')
         time.sleep(1)
         self.acceptbutton.click()
         time.sleep(1)
-    ##---> end     
+        ##---> end    
         self.emailForm = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[1]/div/label/input')
         self.emailForm.click()
         self.emailForm.send_keys(self.login)
