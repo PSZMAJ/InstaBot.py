@@ -7,30 +7,16 @@ class InstaPy():
     
     def __init__(self):
         self.browser = webdriver.Firefox()  
-        print('Author = [Przemysław Szmaj]')
-        time.sleep(0.5)
-        print('GitHub = https://github.com/PSZMAJ')
-        time.sleep(0.5)
-        print('YouTube = https://www.youtube.com/channel/UCewT7Lr5f6LWvqSPXm0JKRw')
-        time.sleep(0.5)
-        print('InstaBot.py ver. 2.0')
-        print('Narzedzie jest darmowe, dlatego za chwile pojawi sie reklama autora, a za ok 30 sekund rozpocznie sie praca narzędzia. ')
-        time.sleep(1)
- 
         
     ### ---> login
     ###Function is responsible for open browser and login with username and password.
     def login(self):
-        self.login = "" ### <--- Tu wprowadź login
-        self.password = "" ### <--- Tu wprowadź hasło
-        self.browser.get('www.ehaker.pl')
-        time.sleep(10)
-        self.browser.get('https://www.instagram.com/_h4ker/')
-        time.sleep(8)
+        self.login = "" # env var
+        self.password = "" # env var
         self.browser.get('https://www.instagram.com/')
         time.sleep(2)
         ##---> click to accept cookies.    
-        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[2]/div/div/button[1]')
+        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[3]/div/div/button[1]')
         time.sleep(3)
         self.acceptbutton.click()
         time.sleep(3)
@@ -53,7 +39,7 @@ class InstaPy():
     ### Function is responsible for open and run browser with random hashtag form hashtags[]
     def add_hashtags_and_search(self):   
         
-        self.hashtags = ['wroclaw','wroclaw','wroclaw','wroclaw','wroclaw','wroclaw','wroclaw']
+        self.hashtags = ['example','example2']
         self.liczba = len(self.hashtags)
         self.hashtags_rand = random.randint(0, self.liczba -1)
         time.sleep(4)
@@ -84,12 +70,12 @@ class InstaPy():
     ### Function is responsible for random skipp to next photo.    
     def skip_photo(self):
         time.sleep(2)
-        self.skip_photo_button = self.browser.find_element_by_link_text('Dalej')
+        self.skip_photo_button = self.browser.find_element_by_link_text('Next')
         self.logic_skip_photo = random.randint(1,3)
         self.i = 0
         while self.i < self.logic_skip_photo:
             time.sleep(1.5)
-            self.skip_photo_button = self.browser.find_element_by_link_text('Dalej')
+            self.skip_photo_button = self.browser.find_element_by_link_text('Next')
             time.sleep(1)
             self.skip_photo_button.click()
             self.i = self.i + 1
@@ -114,7 +100,7 @@ class InstaPy():
     ### Function is responsible for click to next photo.  
     def next_photo(self):
         time.sleep(2)
-        self.next_photo_button = self.browser.find_element_by_link_text('Dalej')
+        self.next_photo_button = self.browser.find_element_by_link_text('Next')
         time.sleep(2)
         self.next_photo_button.click()
      
