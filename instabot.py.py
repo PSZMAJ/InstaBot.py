@@ -28,12 +28,12 @@ class InstaPy():
         self.browser.get('https://www.instagram.com/_h4ker/')
         time.sleep(8)
         self.browser.get('https://www.instagram.com/')
-        time.sleep(2)
+        time.sleep(5)
         ##---> click to accept cookies.    
-        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[2]/div/div/button[1]')
-        time.sleep(3)
+        self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[3]/div/div/button[1]')
+        time.sleep(5)
         self.acceptbutton.click()
-        time.sleep(3)
+        time.sleep(5)
         ##---> end    
         self.emailForm = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[1]/div/label/input')
         self.emailForm.click()
