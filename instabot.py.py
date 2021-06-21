@@ -23,7 +23,7 @@ class InstaPy():
     def login(self):
         self.login = "" ### <--- Tu wprowadź login
         self.password = "" ### <--- Tu wprowadź hasło
-        self.browser.get('www.ehaker.pl')
+        self.browser.get('https://www.ehaker.pl')
         time.sleep(10)
         self.browser.get('https://www.instagram.com/_h4ker/')
         time.sleep(8)
