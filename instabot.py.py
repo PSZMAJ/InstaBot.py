@@ -31,14 +31,14 @@ class InstaPy():
         time.sleep(5)
         #---> click to accept cookies.    
         self.acceptbutton = self.browser.find_element_by_xpath('/html/body/div[3]/div/div/button[1]')
-        time.sleep(2)
+        time.sleep(6)
         self.acceptbutton.click()
-        time.sleep(2)
+        time.sleep(6)
         ##---> end    
         self.emailForm = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[1]/div/label/input')
         self.emailForm.click()
         self.emailForm.send_keys(self.login)
-        time.sleep(2)
+        time.sleep(3)
         self.passwordForm = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[2]/div/label/input')
         self.passwordForm.click()
         self.passwordForm.send_keys(self.password)
@@ -46,7 +46,7 @@ class InstaPy():
         self.loginButton = self.browser.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[3]')
         time.sleep(1)
         self.loginButton.click()
-        time.sleep(35)
+        time.sleep(15)
 
 
     ### ---> add_hashtags_and_search
